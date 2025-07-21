@@ -7,7 +7,7 @@ const events = ref<Event[]>();
 onMounted(() => {
   axios.get('https://my-json-server.typicode.com/HtetOoThu/lab2-vue/events')
     .then(response => {
-      console.log(response.data)
+      events.value = response.data
     })
     .catch((error) => {
       console.error('There was an error!', error);
