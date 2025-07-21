@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import {ref} from 'vue'
 import type { Event } from '@/types'
+import EventCard2 from './icons/EventCard2.vue';
+
 defineProps<{
   event: Event
 }>()
@@ -22,6 +24,7 @@ defineProps<{
     <div class="event-card">
       <h2>{{ event.title }}</h2>
       <span>@{{ event.time}} on {{ event.date }}</span>
+      <EventCard2 :event="event" />
     </div>
   </div> 
 </template>
