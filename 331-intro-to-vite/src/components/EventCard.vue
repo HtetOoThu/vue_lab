@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { Event } from '@/types'
+import  { type Event } from '@/types'
 import EventCard2 from './icons/EventCard2.vue';
 
 defineProps<{
