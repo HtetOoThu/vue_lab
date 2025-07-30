@@ -14,14 +14,19 @@ const props = defineProps({
   page: {
     type: Number,
     required: true
+  },
+  pageSize: {
+    type: Number,
+    required: true
   }
 })
 const page = computed(() => props.page);
+const pageSize = computed(() => props.pageSize);
 
 onMounted(() => {
   watchEffect(() => {
     events.value = null
-    EventService.getEvents(2, page.value)
+    EventService.getEvents(pageSize.value, page.value)
     .then(response => {
       events.value = response.data
       totalEvents.value = response.headers['x-total-count'];    })

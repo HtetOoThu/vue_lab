@@ -1,5 +1,20 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView, useRoute, useRouter } from 'vue-router'
+import { ref, watch } from 'vue'
+
+const route = useRoute()
+const router = useRouter()
+const pageSize = ref(Number(route.query.pageSize) || 2)
+
+watch(pageSize, (newSize) => {
+  router.push({
+    name: 'event-list-view',
+    query: {
+      page: route.query.page || 1,
+      pageSize: newSize
+    }
+  })
+})
 </script>
 
 <template>
@@ -11,6 +26,10 @@ import { RouterLink, RouterView } from 'vue-router'
           <RouterLink :to="{ name: 'about' }">About</RouterLink>
           <RouterLink :to="{ name: 'student-list-view' }">Students</RouterLink>
         </nav>
+        <div>
+          <label for="page-size">Page Size: </label>
+          <input id="page-size" type="number" min="1" v-model.number="pageSize" />
+        </div>
       </div>
     </header>
   </div>
