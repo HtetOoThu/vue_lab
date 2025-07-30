@@ -22,6 +22,7 @@ const props = defineProps({
 })
 const page = computed(() => props.page);
 const pageSize = computed(() => props.pageSize);
+// const pageSize = ref(props.pageSize);
 
 onMounted(() => {
   watchEffect(() => {
@@ -45,14 +46,14 @@ onMounted(() => {
   <div class="pagination">
     <RouterLink 
       id="page-prev"
-      :to="{ name: 'event-list-view', query: { page: page - 1 } }" 
+      :to="{ name: 'event-list-view', query: { page: page - 1, pageSize: pageSize } }" 
       rel="prev"
       v-if="page != 1">&#60;Prev Page
     </RouterLink>
 
     <RouterLink 
       id="page-next"
-      :to="{ name: 'event-list-view', query: { page: page + 1 } }" 
+      :to="{ name: 'event-list-view', query: { page: page + 1, pageSize: pageSize } }" 
       rel="next"
       v-if="hasNextPage">Next Page &#62;
     </RouterLink>
