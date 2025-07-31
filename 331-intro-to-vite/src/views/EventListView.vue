@@ -8,7 +8,7 @@ import nProgress from 'nprogress';
 const events = ref<Event[] | null>();
 const totalEvents = ref(0);
 const hasNextPage = computed(() => {
-  const totalPages = Math.ceil(totalEvents.value / 2);
+  const totalPages = Math.ceil(totalEvents.value / pageSize.value);
   return page.value < totalPages
 })
 const props = defineProps({
@@ -27,7 +27,6 @@ const pageSize = computed(() => props.pageSize);
 
 onMounted(() => {
   watchEffect(() => {
-    events.value = null
     EventService.getEvents(pageSize.value, page.value)
     .then(response => {
       events.value = response.data
