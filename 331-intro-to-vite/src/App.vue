@@ -28,10 +28,15 @@ watch(pageSize, (newSize) => {
         <h4>{{ messages }}</h4>
       </div>
       <div class="wrapper">
-        <nav>
-          <RouterLink :to="{ name: 'event-list-view' }">Event</RouterLink>
-          <RouterLink :to="{ name: 'about' }">About</RouterLink>
-          <RouterLink :to="{ name: 'student-list-view' }">Students</RouterLink>
+        <nav class="py-6">
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" 
+            :to="{ name: 'event-list-view' }">Event</RouterLink>
+
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" 
+            :to="{ name: 'about' }">About</RouterLink>
+            
+          <RouterLink class="font-bold text-gray-700" exact-active-class="text-green-500" 
+            :to="{ name: 'student-list-view' }">Students</RouterLink>
         </nav>
         <div>
           <label for="page-size">Page Size: </label>
