@@ -3,7 +3,6 @@ import EventCard from '@/components/EventCard.vue';
 import { type Event } from '@/types';
 import { ref, onMounted, computed, watchEffect} from 'vue';
 import EventService from '@/services/EventService';
-import nProgress from 'nprogress';
 
 const events = ref<Event[] | null>();
 const totalEvents = ref(0);

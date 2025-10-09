@@ -1,6 +1,8 @@
+import type { Event } from '@/types';
 import axios from 'axios';
 const apiClient = axios.create({
-    baseURL: 'https://my-json-server.typicode.com/HtetOoThu/lab2-vue',
+    baseURL: import.meta.env.VITE_BACKEND_URL,
+    // baseURL: 'http://localhost:8080',
     withCredentials: false, 
     headers: {
         Accept: 'application/json',
@@ -13,5 +15,9 @@ export default {
     },
     getEvent(id: number) {
         return apiClient.get('/events/' + id);
+    },
+    saveEvent(event: Event) {
+        const { id, ...data } = event;
+        return apiClient.post('/events', data);
     }
 }

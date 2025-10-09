@@ -10,7 +10,16 @@ import NotFoundView from '@/views/NotFoundView.vue'
 import NetworkErrorView from '@/views/NetworkErrorView.vue'
 import nProgress from 'nprogress'
 import EventService from '@/services/EventService'
+import AddEventView from '@/views/EventFormView.vue'
+import AddOrganizerView from '@/views/OrganizationForm.vue'
 import { useEventStore } from '@/stores/event'
+import OrganizerListView from '@/views/OrganizerListView.vue'
+import OrganizerService from '@/services/OrganizerService'
+import { useOrganizerStore } from '@/stores/organizer'
+import OrganizerLayoutView from '@/views/organizer/OrgLayoutView.vue';
+import OrganizerDetailView from '@/views/organizer/OrgDetailView.vue';
+import OrganizerRegisterView from '@/views/organizer/OrgRegisterView.vue';
+import OrganizerEditView from '@/views/organizer/OrgEditView.vue';
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -20,6 +29,15 @@ const router = createRouter({
       name: 'event-list-view',
       component: EventListView,
       props: (route) =>({ 
+        page: parseInt (route.query.page?.toString() || '1'),
+        pageSize: parseInt(route.query.pageSize?.toString() || '2')
+      })
+    },
+    {
+      path: '/organizers',
+      name: 'organizer-list-view',
+      component: OrganizerListView,
+      props: (route) =>({
         page: parseInt (route.query.page?.toString() || '1'),
         pageSize: parseInt(route.query.pageSize?.toString() || '2')
       })
@@ -67,10 +85,66 @@ const router = createRouter({
         }       
       ]
     },
+
+    {
+      path: '/organizer/:id',
+      name: 'organizer-layout-view',
+      component: OrganizerLayoutView,
+      props: true,
+      beforeEnter: (to) => {
+        const id = parseInt(to.params.id as string);
+        const organizerStore = useOrganizerStore();
+        return OrganizerService.getOrganizer(id)
+          .then((response) => {
+            organizerStore.setOrganizer(response.data);
+      })
+      .catch((error) => {
+        if (error.response && error.response.status === 404) {
+          return {
+            name: '404-resource-view',
+            params: { resource: 'organizer' }
+          };
+        } else {
+          return { name: 'network-error-view' };
+        }
+      });
+    },
+      children: [
+        {
+          path: '',
+          name: 'organizer-detail-view',
+          component: OrganizerDetailView,
+          props: true
+        },
+        {
+          path: 'register',
+          name: 'organizer-register-view',
+          component: OrganizerRegisterView,
+          props: true
+        },
+        {
+          path: 'edit',
+          name: 'organizer-edit-view',
+          component: OrganizerEditView,
+          props: true
+        }
+      ]
+    },
+ 
     {
       path: '/about',
       name: 'about',
       component: AboutView,
+    },
+    {
+      path: '/add-event',
+      name: 'add-event',
+      component: AddEventView
+    },
+    {
+      path: '/add-organizer',
+      name: 'add-organizer',
+      component: AddOrganizerView
     },
     {
       path: '/404/:resource',
