@@ -1,5 +1,5 @@
 import type { Event } from '@/types';
-import axios from 'axios';
+import axios, { type AxiosResponse } from 'axios';
 const apiClient = axios.create({
     baseURL: import.meta.env.VITE_BACKEND_URL,
     // baseURL: 'http://localhost:8080',
@@ -19,5 +19,9 @@ export default {
     saveEvent(event: Event) {
         const { id, ...data } = event;
         return apiClient.post('/events', data);
+    },
+    getEventsByKeyword(keyword: string, perPage: number, page: number): Promise<AxiosResponse<Event[]>> {
+        return apiClient.get<Event[]>('/events?title=' + keyword + '&_limit=' + perPage + '&_page=' + page);
     }
 }
+

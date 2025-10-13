@@ -36,31 +36,31 @@ watch(pageSize, (newSize) => {
             class="font-bold text-gray-700" 
             exact-active-class="text-green-500" 
             :to="{ name: 'event-list-view' }"
-            >Event</RouterLink>
+            >Event</RouterLink> |
 
           <RouterLink 
             class="font-bold text-gray-700" 
             exact-active-class="text-green-500" 
             :to="{ name: 'organizer-list-view' }"
-            >Organizer</RouterLink>
+            >Organizer</RouterLink> |
 
           <RouterLink 
             class="font-bold text-gray-700" 
             exact-active-class="text-green-500" 
             :to="{ name: 'about' }"
-            >About</RouterLink>
+            >About</RouterLink> |
 
           <RouterLink 
             class="font-bold text-gray-700" 
             exact-active-class="text-green-500" 
             :to="{ name: 'add-event' }"
-            >New Event</RouterLink>
+            >New Event</RouterLink> |
           
           <RouterLink 
             class="font-bold text-gray-700" 
             exact-active-class="text-green-500" 
             :to="{ name: 'add-organizer' }"
-            >New Organizer</RouterLink>
+            >New Organizer</RouterLink> |
 
           <RouterLink 
             class="font-bold text-gray-700" 
