@@ -6,7 +6,7 @@ export interface Event{
     location: string;
     date: string;
     time: string;
-    organizer: string;
+    organizer: Organizer;
 }
 
 export interface Student {
@@ -30,8 +30,7 @@ export interface EventState {
 
 export interface Organizer {
   id: number;
-  organizationName: string;
-  address: string;
+  name: string;
 }
 
 export interface OrganizerState {
