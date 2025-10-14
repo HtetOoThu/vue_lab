@@ -28,7 +28,7 @@ const hasNextPage = computed(() => {
 
 onMounted(() => {
   watchEffect(() => {
-    OrganizerService.getOrganizers(pageSize.value, page.value)
+    OrganizerService.getOrganizers()
       .then(response => {
         organizers.value = response.data;
         totalOrganizers.value = response.headers['x-total-count'];

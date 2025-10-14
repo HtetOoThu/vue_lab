@@ -10,6 +10,8 @@ const { organizer } = toRefs(props);
 </script>
 
 <template>
-  <p>{{ organizer.organizationName }} </p>
-  <p>{{ organizer.address }}</p>
+  <p>{{ organizer.name }} </p>
+  <div class="flex flex-row flex-wrap justify-center">
+        <img v-for="image in organizer.images" :key="image" :src="image" alt="events image" class="border-solid border-gray-200 border-2 rounded p-1 m-1 w-40 hover:shadow-lg"/>
+    </div>
 </template>
